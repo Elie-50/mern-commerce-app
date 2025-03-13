@@ -1,5 +1,9 @@
 import { Router } from "express";
-
+import validateBody from "../validators/index.validator.js";
+import { postProductSchema, updateProductSchema } from "../validators/product.validator.js";
+import { authenticate } from "../middlewares/auth.middleware.js";
+import csrfProtection from "../config/csrf.config.js";
+import { authoriseAdminsOnly } from "../middlewares/admin.middleware.js";
 import { 
     createProduct,
     deleteProduct,
@@ -8,13 +12,7 @@ import {
     getProducts,
     getProductsByCategory,
     updateProduct
-} from "../controllers/product.controller";
-
-import validateBody from "../validators/index.validator";
-import { postProductSchema, updateProductSchema } from "../validators/product.validator";
-import { authenticate } from "../middlewares/auth.middleware";
-import csrfProtection from "../config/csrf.config";
-import { authoriseAdminsOnly } from "../middlewares/admin.middleware";
+} from "../controllers/product.controller.js";
 
 const productsRouter = Router();
 
@@ -35,3 +33,4 @@ productsRouter.delete('/:id', authenticate, authoriseAdminsOnly, deleteProduct);
 
 productsRouter.patch('/:id', csrfProtection, authenticate, authoriseAdminsOnly, validateBody(updateProductSchema), updateProduct);
 
+export default productsRouter;

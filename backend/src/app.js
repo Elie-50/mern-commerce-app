@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import cors from 'cors';
 import corsOptions from './config/cors.config.js';
 import helmet from 'helmet';
+import { config } from './config/env.config.js';
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 
 
 // Routes
-app.use('/api', routes);
+app.use(`/api/${config.apiVersion}`, routes);
 
 app.use(errorMiddleware);
 

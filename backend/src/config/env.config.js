@@ -8,4 +8,5 @@ export const config = {
   mongoTestURI: process.env.MONGO_TEST_URI,
   jwtSecret: process.env.JWT_SECRET,
   jwtExpiresIn: process.env.JWT_EXPIRES_IN,
+  apiVersion: process.env.API_VERSION
 };
