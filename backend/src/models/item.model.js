@@ -20,7 +20,13 @@ const itemSchema = new mongoose.Schema(
         status:{
             type: String,
             required: true,
-            enum: ['pending', 'ordered', 'shipped', 'on_its_way', 'delivered', 'on_hold'],
+            enum: [
+                'pending', // the item is being proccessed before shipping
+                'ordered', // the user has ordered the item
+                'shipping', // the item is shipped, i.e it's on it's way
+                'delivered', // the item is delivered to the user
+                'on_hold' // the item is in the cart but not ordered yet
+            ],
             default: 'on_hold'
         }
     },
